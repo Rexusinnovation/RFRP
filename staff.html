@@ -3,31 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pannello Staff | RFRP</title>
+  <title>RFRP - Area Staff</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Pannello Staff</h1>
+    <h1>Area Staff</h1>
     <nav>
       <a href="index.html">Home</a>
-      <a href="status.html">Status</a>
-      <a href="staff.html" class="active">Staff</a>
+      <a href="status.html">Stato Server</a>
+      <a href="staff.html" class="active">Area Staff</a>
     </nav>
   </header>
 
-  <section class="staff-section">
-    <h2>Accesso Staff</h2>
-    <form id="loginForm">
-      <input type="text" placeholder="Username" required>
-      <input type="password" placeholder="Password" required>
-      <button type="submit" class="btn">Accedi</button>
+  <main>
+    <form id="loginForm" class="login-box">
+      <h2>Accesso Staff</h2>
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Accedi</button>
+      <p id="login-msg"></p>
     </form>
-    <p id="login-msg"></p>
-  </section>
+
+    <div id="panel" class="panel hidden">
+      <h2>Pannello di Controllo</h2>
+      <label>Server di Gioco:
+        <select id="serverSelect">
+          <option>Online</option>
+          <option>Offline</option>
+          <option>Manutenzione</option>
+        </select>
+      </label>
+
+      <label>Bot Discord:
+        <select id="botSelect">
+          <option>Online</option>
+          <option>Offline</option>
+          <option>Manutenzione</option>
+        </select>
+      </label>
+
+      <label>Applicazioni:
+        <select id="appSelect">
+          <option>Aperte</option>
+          <option>Chiuse</option>
+          <option>In Manutenzione</option>
+        </select>
+      </label>
+
+      <button id="saveBtn">Salva Stato</button>
+    </div>
+  </main>
 
   <footer>
-    <p>© 2025 RFRP - Tutti i diritti riservati</p>
+    <p>© 2025 RFRP</p>
   </footer>
 
   <script src="script.js"></script>
