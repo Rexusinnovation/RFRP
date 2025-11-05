@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RFRP - Area Staff</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
@@ -17,14 +17,16 @@
   </header>
 
   <main>
+    <!-- FORM LOGIN -->
     <form id="loginForm" class="login-box">
       <h2>Accesso Staff</h2>
-      <input type="text" id="username" placeholder="Username" required>
-      <input type="password" id="password" placeholder="Password" required>
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
       <button type="submit">Accedi</button>
       <p id="login-msg"></p>
     </form>
 
+    <!-- PANNELLO (NASCONTO DI DEFAULT) -->
     <div id="panel" class="panel hidden">
       <h2>Pannello di Controllo</h2>
       <label>Server di Gioco:
@@ -51,8 +53,10 @@
         </select>
       </label>
 
-      <button id="saveBtn">Salva Stato</button>
-      <button id="logoutBtn" class="logout">Logout</button>
+      <div class="buttons">
+        <button id="saveBtn">Salva Stato</button>
+        <button id="logoutBtn" class="logout">Logout</button>
+      </div>
     </div>
   </main>
 
