@@ -1,91 +1,81 @@
 body {
-  margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #0e0e0e;
-  color: #fff;
+  margin: 0;
+  background: #0f0f0f;
+  color: white;
   text-align: center;
 }
 
 header {
-  background: #111;
-  padding: 20px;
-}
-
-h1 {
-  margin: 0;
-  color: #00ff99;
-}
-
-nav {
-  margin-top: 10px;
+  background: #1b1b1b;
+  padding: 20px 0;
 }
 
 nav a {
-  color: #fff;
-  margin: 0 10px;
+  color: white;
+  margin: 0 15px;
   text-decoration: none;
-  font-weight: bold;
 }
 
-nav a:hover, .active {
-  color: #00ff99;
+nav a.active {
+  color: #00ff9d;
 }
 
 .hero {
-  padding: 100px 20px;
-  background: linear-gradient(180deg, #111, #000);
-}
-
-.hero h2 {
-  font-size: 2em;
+  margin-top: 60px;
 }
 
 .btn {
   display: inline-block;
-  margin-top: 20px;
+  background: #00ff9d;
+  color: black;
   padding: 12px 25px;
-  background: #00ff99;
-  color: #000;
   border-radius: 10px;
+  font-weight: bold;
   text-decoration: none;
-  font-weight: bold;
 }
 
-.status-section, .staff-section {
-  padding: 60px 20px;
+.status-container {
+  margin-top: 50px;
 }
 
-.status-card {
+.login-box {
+  margin-top: 60px;
   background: #1a1a1a;
-  border-radius: 15px;
-  padding: 30px;
   display: inline-block;
-  margin-top: 20px;
-  text-align: left;
+  padding: 30px;
+  border-radius: 10px;
 }
 
-.status-card span {
-  font-weight: bold;
-  color: #00ff99;
-}
-
-input {
+.login-box input {
   display: block;
   margin: 10px auto;
   padding: 10px;
-  border-radius: 8px;
+  width: 200px;
   border: none;
-  width: 80%;
-  max-width: 300px;
+  border-radius: 5px;
 }
 
 button {
+  background: #00ff9d;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
-footer {
-  background: #111;
-  padding: 15px;
-  font-size: 14px;
+button:hover {
+  background: #00cc7b;
+}
+
+.hidden {
+  display: none;
+}
+
+.panel {
   margin-top: 40px;
+  background: #1a1a1a;
+  display: inline-block;
+  padding: 25px;
+  border-radius: 10px;
 }
