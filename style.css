@@ -1,84 +1,224 @@
-body {
-  font-family: 'Poppins', sans-serif;
+/* === FONT === */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap');
+
+/* === GLOBAL === */
+* {
   margin: 0;
-  background: #0f0f0f;
-  color: white;
-  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
+body {
+  background: radial-gradient(circle at top, #0a0a0a 0%, #000000 80%);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* === HEADER === */
 header {
-  background: #1b1b1b;
+  width: 100%;
+  background: rgba(10, 10, 10, 0.95);
+  box-shadow: 0 0 20px #00ff99;
+  text-align: center;
   padding: 20px 0;
+  border-bottom: 2px solid #00ff99;
+}
+
+header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #00ff99;
+  text-shadow: 0 0 15px #00ff99;
+}
+
+/* === NAVBAR === */
+nav {
+  margin-top: 10px;
 }
 
 nav a {
-  color: white;
+  color: #ccc;
+  text-decoration: none;
   margin: 0 15px;
-  text-decoration: none;
-}
-
-nav a.active {
-  color: #00ff9d;
-}
-
-.hero {
-  margin-top: 60px;
-}
-
-.btn {
-  display: inline-block;
-  background: #00ff9d;
-  color: black;
-  padding: 12px 25px;
-  border-radius: 10px;
   font-weight: bold;
-  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.status-container {
-  margin-top: 50px;
+nav a:hover,
+nav a.active {
+  color: #00ff99;
+  text-shadow: 0 0 10px #00ff99;
 }
 
+/* === MAIN === */
+main {
+  flex: 1;
+  width: 90%;
+  max-width: 900px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* === LOGIN BOX === */
 .login-box {
-  margin-top: 60px;
-  background: #1a1a1a;
-  display: inline-block;
-  padding: 30px;
-  border-radius: 10px;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid #00ff99;
+  box-shadow: 0 0 25px rgba(0, 255, 153, 0.3);
+  border-radius: 15px;
+  padding: 25px;
+  width: 300px;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-box:hover {
+  box-shadow: 0 0 40px rgba(0, 255, 153, 0.5);
+}
+
+.login-box h2 {
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 20px;
+  color: #00ff99;
+  text-shadow: 0 0 10px #00ff99;
 }
 
 .login-box input {
-  display: block;
-  margin: 10px auto;
+  width: 90%;
   padding: 10px;
-  width: 200px;
+  margin: 10px 0;
   border: none;
-  border-radius: 5px;
-}
-
-button {
-  background: #00ff9d;
-  border: none;
-  padding: 10px 20px;
+  outline: none;
   border-radius: 8px;
+  background: #1b1b1b;
+  color: white;
+  text-align: center;
+  font-size: 0.95rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.login-box input:focus {
+  box-shadow: 0 0 10px #00ff99;
+}
+
+.login-box button {
+  background: #00ff99;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 20px;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-  background: #00cc7b;
+.login-box button:hover {
+  background: #00cc77;
+  transform: scale(1.05);
 }
 
-.hidden {
-  display: none;
-}
-
+/* === PANEL === */
 .panel {
-  margin-top: 40px;
-  background: #1a1a1a;
-  display: inline-block;
+  background: rgba(15, 15, 15, 0.95);
+  border: 1px solid #00ff99;
+  box-shadow: 0 0 25px rgba(0, 255, 153, 0.3);
+  border-radius: 15px;
   padding: 25px;
-  border-radius: 10px;
+  width: 600px;
+  text-align: center;
+  animation: fadeIn 0.5s ease forwards;
 }
+
+.panel h2 {
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 20px;
+  color: #00ff99;
+  text-shadow: 0 0 10px #00ff99;
+}
+
+.panel label {
+  display: block;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.panel select {
+  margin-left: 10px;
+  background: #1b1b1b;
+  color: white;
+  border: 1px solid #00ff99;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.buttons button {
+  background: #00ff99;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.buttons button:hover {
+  background: #00cc77;
+  transform: scale(1.05);
+}
+
+button.logout {
+  background: #ff4444;
+  color: #fff;
+}
+
+button.logout:hover {
+  background: #cc0000;
+}
+
+/* === FOOTER === */
+footer {
+  margin-top: 40px;
+  padding: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #999;
+  border-top: 1px solid #00ff99;
+  width: 100%;
+  background: #050505;
+}
+
+footer p {
+  font-family: 'Orbitron', sans-serif;
+  color: #00ff99;
+  letter-spacing: 1px;
+}
+
+/* === EFFECTS === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === UTILITY === */
+.hidden {
+  display: none !important;
+}
+
 .hidden {
   display: none !important;
 }
