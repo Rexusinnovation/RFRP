@@ -1,124 +1,214 @@
-/* === FONT IMPORT === */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600&display=swap');
-
-/* === RESET & GLOBAL === */
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  background: radial-gradient(circle at top left, #050505 0%, #000000 80%);
-  color:#e6f7ef;
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #000000, #060606 60%);
+  color: #fff;
 }
 
-/* === HEADER === */
-header{
-  width:100%;
-  position:relative;
-  background:rgba(6,6,6,0.95);
-  border-bottom:2px solid rgba(0,255,153,0.06);
-  box-shadow:0 6px 30px rgba(0,0,0,0.6);
-}
-.header-inner{
-  max-width:1100px;
-  margin:0 auto;
-  padding:20px 24px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:40px;
-  position:relative;
-}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{
-  width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#00ff99,#00cc77);
-  display:flex;align-items:center;justify-content:center;font-weight:700;color:#001;
-  font-family: 'Orbitron', sans-serif;font-size:20px;
-  box-shadow:0 0 12px rgba(0,255,153,0.25);
-}
-.brand-text .title{
-  font-family:'Orbitron',sans-serif;color:#00ff99;font-size:22px;text-shadow:0 0 12px rgba(0,255,153,0.12);
-}
-.brand-text .subtitle{font-size:12px;color:#9fbfb0}
-
-/* NAV */
-.main-nav{display:flex;gap:18px;align-items:center}
-.main-nav a{color:#cfeee0;text-decoration:none;font-weight:600;padding:6px 8px;border-radius:6px;transition:all .2s}
-.main-nav a:hover{color:#00ff99;text-shadow:0 0 6px rgba(0,255,153,0.3)}
-.main-nav a.active{color:#00ff99}
-
-/* BUY BUTTON top-right */
-.buy-btn{
-  position:absolute;
-  right:22px;
-  top:18px;
-  background:linear-gradient(180deg,#00ff99,#00cc77);
-  color:#001;
-  font-weight:800;
-  padding:10px 16px;
-  border-radius:28px;
-  text-decoration:none;
-  box-shadow:0 6px 30px rgba(0,255,153,0.18), 0 0 18px rgba(0,255,153,0.12) inset;
-  transition:transform .15s,box-shadow .15s;
-}
-.buy-btn:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(0,255,153,0.25)}
-
-/* neon horizontal line under header */
-.neon-line{
-  height:6px;
-  background:linear-gradient(90deg, rgba(0,255,153,0) 0%, rgba(0,255,153,0.9) 50%, rgba(0,255,153,0) 100%);
-  box-shadow:0 0 20px rgba(0,255,153,0.12);
+header {
+  background: #0a0a0a;
+  box-shadow: 0 0 20px rgba(0, 255, 128, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-/* === MAIN === */
-main{width:100%;max-width:1100px;margin:36px auto;padding:0 20px 60px;display:flex;flex-direction:column;gap:36px;align-items:center}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
 
-/* HERO */
-.hero{display:flex;gap:28px;width:100%;align-items:flex-start;justify-content:space-between}
-.hero-left{flex:1;min-width:320px}
-.hero h1{font-family:'Orbitron',sans-serif;color:#00ff99;font-size:34px;margin-bottom:10px;text-shadow:0 0 18px rgba(0,255,153,0.18)}
-.hero h1 span{color:#b8ffdf;text-shadow:0 0 26px rgba(0,255,153,0.25)}
-.lead{color:#cfeee0;max-width:760px;line-height:1.6;margin-bottom:18px;font-size:1.05rem}
+.brand {
+  display: flex;
+  align-items: center;
+}
 
-/* CTA Buttons */
-.hero-cta{display:flex;gap:12px}
-.btn{display:inline-block;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:700;cursor:pointer}
-.btn-neon{background:linear-gradient(180deg,#00ff99,#00cc77);color:#001;box-shadow:0 8px 30px rgba(0,255,153,0.12)}
-.btn-outline{background:transparent;border:1px solid rgba(180,255,214,0.06);color:#dff8ea}
+.logo {
+  background: #00ff88;
+  color: #000;
+  font-weight: bold;
+  padding: 0.6rem;
+  border-radius: 8px;
+  margin-right: 10px;
+}
 
-/* HERO RIGHT CARD */
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;box-shadow:0 10px 40px rgba(0,0,0,0.6);border:1px solid rgba(0,255,153,0.05)}
-.hero-right{width:320px}
-.card h3{color:#cfeee0;margin-bottom:10px;font-size:1.05rem}
-.info-list{list-style:none;padding-left:0;color:#cbeedc}
-.info-list li{margin:8px 0;font-size:0.95rem}
-.btn-small{display:inline-block;margin-top:12px;padding:8px 12px;border-radius:8px;background:rgba(0,255,153,0.12);color:#00ff99;text-decoration:none;font-weight:700;border:1px solid rgba(0,255,153,0.12)}
+.brand-text .title {
+  font-size: 1.3rem;
+  color: #00ff88;
+  font-weight: bold;
+  text-shadow: 0 0 8px #00ff88;
+}
 
-/* FEATURES */
-.features{width:100%;text-align:center}
-.features h2{font-family:'Orbitron',sans-serif;color:#bfffdc;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px}
-.feature{padding:16px;text-align:left}
-.feature h4{color:#e6fff0;margin-bottom:8px}
-.feature p{color:#bfead5;font-size:0.95rem;line-height:1.5}
+.brand-text .subtitle {
+  font-size: 0.8rem;
+  color: #999;
+}
 
-/* TRAILER */
-.trailer{width:100%;padding:18px}
-.video-wrap{background:#080808;border-radius:10px;overflow:hidden;padding-top:56%;position:relative}
-.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.main-nav a {
+  color: #ccc;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: 0.2s;
+}
 
-/* FOOTER */
-footer{width:100%;border-top:1px solid rgba(0,255,153,0.05);padding:18px 0;margin-top:20px;background:transparent}
-.footer-inner{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;color:#9fbfb0}
-.footer-inner .small{font-size:0.85rem;color:#8fbda5}
+.main-nav a.active,
+.main-nav a:hover {
+  color: #00ff88;
+  text-shadow: 0 0 5px #00ff88;
+}
 
-/* RESPONSIVE */
-@media (max-width:900px){
-  .hero{flex-direction:column;align-items:center}
-  .hero-right{width:100%}
-  .grid{grid-template-columns:1fr}
-  .header-inner{justify-content:space-between;padding:14px 18px}
-  .buy-btn{right:14px;top:12px;padding:8px 12px}
+.buy-btn {
+  background: linear-gradient(90deg, #00ff88, #00ffaa);
+  color: #000;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 8px 18px;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.buy-btn:hover {
+  transform: scale(1.05);
+}
+
+.neon-line {
+  height: 2px;
+  background: linear-gradient(90deg, #00ff88, #00ffaa);
+  box-shadow: 0 0 10px #00ff88;
+}
+
+.hero {
+  text-align: center;
+  padding: 6rem 2rem;
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+}
+
+.hero span {
+  color: #00ff88;
+  text-shadow: 0 0 10px #00ff88;
+}
+
+.hero .lead {
+  color: #ccc;
+  max-width: 700px;
+  margin: 1rem auto;
+  line-height: 1.6;
+}
+
+.hero-cta .btn {
+  margin: 0.5rem;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.btn-neon {
+  background: #00ff88;
+  color: #000;
+  transition: 0.3s;
+}
+
+.btn-neon:hover {
+  box-shadow: 0 0 15px #00ff88;
+}
+
+.btn-outline {
+  border: 2px solid #00ff88;
+  color: #00ff88;
+}
+
+.btn-outline:hover {
+  background: #00ff88;
+  color: #000;
+}
+
+.status-section {
+  text-align: center;
+  padding: 5rem 2rem;
+}
+
+.status-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.status-card {
+  background: #111;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 255, 128, 0.1);
+  width: 220px;
+}
+
+.status-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin: 10px auto;
+}
+
+.online {
+  background: #00ff88;
+  box-shadow: 0 0 10px #00ff88;
+}
+
+.offline {
+  background: #ff0033;
+  box-shadow: 0 0 10px #ff0033;
+}
+
+.maintenance {
+  background: #ffaa00;
+  box-shadow: 0 0 10px #ffaa00;
+}
+
+.staff-login {
+  text-align: center;
+  padding: 5rem 2rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 300px;
+  margin: 2rem auto;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background: #111;
+  color: #fff;
+  box-shadow: inset 0 0 5px #00ff88;
+}
+
+.note {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid #00ff88;
+  font-size: 0.9rem;
+  color: #ccc;
 }
