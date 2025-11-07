@@ -31,7 +31,7 @@
   <main class="status-main">
     <h1 class="center-title">Stato dei Servizi</h1>
 
-    <div class="status-container">
+    <div class="status-container row">
       <div class="status-box">
         <h2>Server di Gioco</h2>
         <div class="status-led">
@@ -65,7 +65,10 @@
   <script>
     async function loadStatus() {
       try {
-        const res = await fetch('status.json?_=' + Date.now());
+        // aggiunto timestamp per evitare cache di GitHub Pages
+        const res = await fetch('status.json?cacheBust=' + new Date().getTime());
+        if (!res.ok) throw new Error('File status.json non trovato');
+
         const data = await res.json();
 
         const statuses = {
@@ -90,8 +93,10 @@
       } catch (err) {
         document.querySelectorAll('.led').forEach(el => el.style.backgroundColor = 'red');
         document.querySelectorAll('.status-led span:last-child').forEach(el => el.textContent = 'Errore nel caricamento');
+        console.error(err);
       }
     }
+
     loadStatus();
   </script>
 </body>
