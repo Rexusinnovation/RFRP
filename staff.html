@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RFRP IT® - Area Staff</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
@@ -29,19 +29,143 @@
   </header>
 
   <main>
-    <section class="staff-login">
+    <!-- AREA LOGIN -->
+    <section class="staff-login" id="login-area">
       <h1>Accesso Area Staff</h1>
-      <form class="login-form">
-        <input type="text" placeholder="Username" required>
-        <input type="password" placeholder="Password" required>
+      <form id="loginForm" class="login-form" autocomplete="off">
+        <input id="login-username" type="text" placeholder="Username" required />
+        <input id="login-password" type="password" placeholder="Password" required />
         <button type="submit" class="btn btn-neon">Accedi</button>
+        <p id="login-error" style="color:#ffb4b4;margin-top:8px"></p>
       </form>
       <p class="note">Accesso riservato ai membri dello staff RFRP IT®</p>
+    </section>
+
+    <!-- PANNELLO (nascondo di default) -->
+    <section id="panel-area" class="panel hidden" style="margin-top:32px; text-align:center; padding:20px; max-width:800px;">
+      <h2>Pannello di Controllo (Test)</h2>
+      <p class="small">Sei loggato come <strong id="logged-user"></strong></p>
+
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px">
+        <label style="display:flex;flex-direction:column;align-items:flex-start">
+          Server di Gioco:
+          <select id="serverSelect" style="margin-top:6px;padding:8px;border-radius:6px;background:#0b0b0b;color:#fff;border:1px solid rgba(0,255,136,0.08)">
+            <option>Online</option>
+            <option>Offline</option>
+            <option>Manutenzione</option>
+          </select>
+        </label>
+
+        <label style="display:flex;flex-direction:column;align-items:flex-start">
+          Bot Discord:
+          <select id="botSelect" style="margin-top:6px;padding:8px;border-radius:6px;background:#0b0b0b;color:#fff;border:1px solid rgba(0,255,136,0.08)">
+            <option>Online</option>
+            <option>Offline</option>
+            <option>Manutenzione</option>
+          </select>
+        </label>
+
+        <label style="display:flex;flex-direction:column;align-items:flex-start">
+          Applicazioni:
+          <select id="appSelect" style="margin-top:6px;padding:8px;border-radius:6px;background:#0b0b0b;color:#fff;border:1px solid rgba(0,255,136,0.08)">
+            <option>Aperte</option>
+            <option>Chiuse</option>
+            <option>In Manutenzione</option>
+          </select>
+        </label>
+      </div>
+
+      <div style="margin-top:18px;display:flex;gap:12px;justify-content:center">
+        <button id="saveBtn" class="btn btn-neon">Salva Stato</button>
+        <button id="logoutBtn" class="btn" style="background:#ff5c6c;color:#fff;border-radius:8px">Logout</button>
+      </div>
+
+      <p id="panel-msg" style="color:#bfeed5;margin-top:12px"></p>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 RFRP IT® - Tutti i diritti riservati</p>
+    <p style="text-align:center">© 2025 RFRP IT® - Tutti i diritti riservati</p>
   </footer>
+
+  <script>
+    // --- USERS HARDcoded per test (temporaneo) ---
+    const USERS = [
+      { username: 'admin', password: '1234' },
+      { username: 'staff1', password: 'staffpass' }
+    ];
+
+    // elements
+    const loginArea = document.getElementById('login-area');
+    const panelArea = document.getElementById('panel-area');
+    const loginForm = document.getElementById('loginForm');
+    const loginError = document.getElementById('login-error');
+    const loggedUserEl = document.getElementById('logged-user');
+    const panelMsg = document.getElementById('panel-msg');
+
+    // keep state in localStorage (simple)
+    function isLogged() {
+      return !!localStorage.getItem('rfrp_logged_user');
+    }
+    function getLoggedUser() {
+      return localStorage.getItem('rfrp_logged_user') || '';
+    }
+
+    // show/hide based on login
+    function refreshUI() {
+      if (isLogged()) {
+        loginArea.classList.add('hidden');
+        panelArea.classList.remove('hidden');
+        loggedUserEl.textContent = getLoggedUser();
+        // load saved status to selects
+        const s = JSON.parse(localStorage.getItem('rfrp_status') || '{}');
+        if (s.server) document.getElementById('serverSelect').value = s.server;
+        if (s.bot) document.getElementById('botSelect').value = s.bot;
+        if (s.app) document.getElementById('appSelect').value = s.app;
+      } else {
+        loginArea.classList.remove('hidden');
+        panelArea.classList.add('hidden');
+      }
+    }
+
+    // initial UI
+    refreshUI();
+
+    // login submit
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      loginError.textContent = '';
+      const u = document.getElementById('login-username').value.trim();
+      const p = document.getElementById('login-password').value.trim();
+      const found = USERS.find(x => x.username === u && x.password === p);
+      if (!found) {
+        loginError.textContent = 'Credenziali errate. Controlla username/password.';
+        return;
+      }
+      // success
+      localStorage.setItem('rfrp_logged_user', found.username);
+      loginError.textContent = '';
+      refreshUI();
+    });
+
+    // save state
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      const status = {
+        server: document.getElementById('serverSelect').value,
+        bot: document.getElementById('botSelect').value,
+        app: document.getElementById('appSelect').value
+      };
+      localStorage.setItem('rfrp_status', JSON.stringify(status));
+      panelMsg.textContent = 'Stato salvato localmente (demo).';
+      setTimeout(()=>panelMsg.textContent = '', 3000);
+      // optional: update public page via storage (users viewing status.html will read localStorage)
+    });
+
+    // logout
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('rfrp_logged_user');
+      refreshUI();
+    });
+  </script>
 </body>
 </html>
