@@ -1,38 +1,99 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>RFRP IT® - Home</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>RFRP IT®</h1>
-    <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="stato.html">Stato Server</a>
-      <a href="staff.html">Area Staff</a>
-    </nav>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo">R</div>
+        <div class="brand-text">
+          <div class="title">RFRP IT®</div>
+          <div class="subtitle">Roleplay Server • FiveM</div>
+        </div>
+      </div>
 
-    <!-- Bottone Compra in alto a destra -->
-    <a href="https://rfrp-originals.tebex.io/" class="buy-btn">Compra</a>
+      <nav class="main-nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="status.html">Stato Server</a>
+        <a href="staff.html">Area Staff</a>
+      </nav>
+
+      <a class="buy-btn" href="https://rfrp-originals.tebex.io/" target="_blank" rel="noreferrer">Compra</a>
+    </div>
+    <div class="neon-line"></div>
   </header>
 
-  <main class="home-content">
-    <h2>Benvenuto su <span>RFRP IT®</span></h2>
-    <p>
-      Vivi l’esperienza più realistica di <strong>roleplay su FiveM</strong>.  
-      Unisciti alla nostra community e scopri un mondo dove ogni scelta conta.
-    </p>
-    <div class="cta-buttons">
-      <a href="stato.html" class="btn neon">Stato Server</a>
-      <a href="staff.html" class="btn neon">Area Staff</a>
-    </div>
+  <main>
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Benvenuto su <span>RFRP IT®</span></h1>
+        <p class="lead">
+          Vivi l’esperienza di roleplay più immersiva su FiveM: economy realistica,
+          eventi live, add-on esclusivi e una community che spacca. Entra, scopri e
+          costruisci la tua storia.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn btn-neon" href="status.html">Controlla lo stato</a>
+          <a class="btn btn-outline" href="staff.html">Pannello Staff</a>
+        </div>
+      </div>
+
+      <aside class="hero-right card">
+        <h3>Quick info</h3>
+        <ul class="info-list">
+          <li><strong>IP Server:</strong> <span>play.rfrp.it</span></li>
+          <li><strong>Giocatori:</strong> <span id="players">—</span></li>
+          <li><strong>Discord:</strong> <a href="https://discord.gg/tuo-invite" target="_blank" rel="noreferrer">Entra nella community</a></li>
+        </ul>
+        <a class="btn btn-small" href="fivem://connect/play.rfrp.it">Connetti</a>
+      </aside>
+    </section>
+
+    <section class="features">
+      <h2>Perché giocare su RFRP IT®</h2>
+      <div class="grid">
+        <div class="feature card">
+          <h4>Economia realistica</h4>
+          <p>Sistema bilanciato di lavori, tasse e mercato per roleplay profondo.</p>
+        </div>
+        <div class="feature card">
+          <h4>Eventi live</h4>
+          <p>Eventi settimanali moderati dallo staff, con ricompense e storie.</p>
+        </div>
+        <div class="feature card">
+          <h4>Add-on esclusivi</h4>
+          <p>Veicoli e script custom sviluppati dal team RFRP.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="trailer card">
+      <h2>Trailer Ufficiale</h2>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Trailer RFRP" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>© 2025 RFRP IT® - Tutti i diritti riservati</p>
+    <div class="footer-inner">
+      <div>© 2025 RFRP IT® - Tutti i diritti riservati</div>
+      <div class="small">La giungla è la mia pista.</div>
+    </div>
   </footer>
+
+  <script>
+    // demo: popola giocatori da localStorage (se esiste)
+    const playersEl = document.getElementById('players');
+    const saved = JSON.parse(localStorage.getItem('rfrpStatus') || '{}');
+    // se hai un valore reale in saved.players -> usalo, altrimenti mostra —
+    playersEl.textContent = saved.players ?? '—';
+  </script>
 </body>
 </html>
