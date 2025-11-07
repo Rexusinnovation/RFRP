@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RFRP IT® - Home</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -33,50 +33,12 @@
       <div class="hero-left">
         <h1>Benvenuto su <span>RFRP IT®</span></h1>
         <p class="lead">
-          Vivi l’esperienza di roleplay più immersiva su FiveM: economy realistica,
-          eventi live, add-on esclusivi e una community che spacca. Entra, scopri e
-          costruisci la tua storia.
+          Vivi l’esperienza più realistica di roleplay su FiveM. Unisciti alla nostra community e scopri un mondo dove ogni scelta conta.
         </p>
-
         <div class="hero-cta">
-          <a class="btn btn-neon" href="status.html">Controlla lo stato</a>
-          <a class="btn btn-outline" href="staff.html">Pannello Staff</a>
+          <a class="btn btn-neon" href="status.html">Stato Server</a>
+          <a class="btn btn-outline" href="staff.html">Area Staff</a>
         </div>
-      </div>
-
-      <aside class="hero-right card">
-        <h3>Quick info</h3>
-        <ul class="info-list">
-          <li><strong>IP Server:</strong> <span>play.rfrp.it</span></li>
-          <li><strong>Giocatori:</strong> <span id="players">—</span></li>
-          <li><strong>Discord:</strong> <a href="https://discord.gg/tuo-invite" target="_blank" rel="noreferrer">Entra nella community</a></li>
-        </ul>
-        <a class="btn btn-small" href="fivem://connect/play.rfrp.it">Connetti</a>
-      </aside>
-    </section>
-
-    <section class="features">
-      <h2>Perché giocare su RFRP IT®</h2>
-      <div class="grid">
-        <div class="feature card">
-          <h4>Economia realistica</h4>
-          <p>Sistema bilanciato di lavori, tasse e mercato per roleplay profondo.</p>
-        </div>
-        <div class="feature card">
-          <h4>Eventi live</h4>
-          <p>Eventi settimanali moderati dallo staff, con ricompense e storie.</p>
-        </div>
-        <div class="feature card">
-          <h4>Add-on esclusivi</h4>
-          <p>Veicoli e script custom sviluppati dal team RFRP.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="trailer card">
-      <h2>Trailer Ufficiale</h2>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Trailer RFRP" frameborder="0" allowfullscreen></iframe>
       </div>
     </section>
   </main>
@@ -87,13 +49,5 @@
       <div class="small">La giungla è la mia pista.</div>
     </div>
   </footer>
-
-  <script>
-    // demo: popola giocatori da localStorage (se esiste)
-    const playersEl = document.getElementById('players');
-    const saved = JSON.parse(localStorage.getItem('rfrpStatus') || '{}');
-    // se hai un valore reale in saved.players -> usalo, altrimenti mostra —
-    playersEl.textContent = saved.players ?? '—';
-  </script>
 </body>
 </html>
