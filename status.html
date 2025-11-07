@@ -29,20 +29,31 @@
   </header>
 
   <main class="status-main">
-    <h1>Stato dei Servizi</h1>
+    <h1 class="center-title">Stato dei Servizi</h1>
 
     <div class="status-container">
-      <div class="status-item">
-        <h3>Server di Gioco</h3>
-        <p id="serverStatus" class="status">Caricamento...</p>
+      <div class="status-box">
+        <h2>Server di Gioco</h2>
+        <div class="status-led">
+          <span id="serverStatus" class="led"></span>
+          <span id="serverText">Caricamento...</span>
+        </div>
       </div>
-      <div class="status-item">
-        <h3>Bot Discord</h3>
-        <p id="botStatus" class="status">Caricamento...</p>
+
+      <div class="status-box">
+        <h2>Bot Discord</h2>
+        <div class="status-led">
+          <span id="botStatus" class="led"></span>
+          <span id="botText">Caricamento...</span>
+        </div>
       </div>
-      <div class="status-item">
-        <h3>Applicazioni</h3>
-        <p id="appStatus" class="status">Caricamento...</p>
+
+      <div class="status-box">
+        <h2>Applicazioni</h2>
+        <div class="status-led">
+          <span id="appStatus" class="led"></span>
+          <span id="appText">Caricamento...</span>
+        </div>
       </div>
     </div>
   </main>
@@ -58,18 +69,27 @@
         const data = await res.json();
 
         const statuses = {
-          Online: '🟢 Online',
-          Offline: '🔴 Offline',
-          Manutenzione: '🟡 In manutenzione',
-          Aperte: '🟢 Aperte',
-          Chiuse: '🔴 Chiuse'
+          Online: { text: 'Online', color: 'green' },
+          Offline: { text: 'Offline', color: 'red' },
+          Manutenzione: { text: 'In manutenzione', color: 'yellow' },
+          Aperte: { text: 'Aperte', color: 'green' },
+          Chiuse: { text: 'Chiuse', color: 'red' }
         };
 
-        document.getElementById('serverStatus').textContent = statuses[data.server] || data.server;
-        document.getElementById('botStatus').textContent = statuses[data.bot] || data.bot;
-        document.getElementById('appStatus').textContent = statuses[data.app] || data.app;
+        function updateStatus(id, key, textId) {
+          const status = statuses[data[key]] || { text: data[key], color: 'gray' };
+          const led = document.getElementById(id);
+          const text = document.getElementById(textId);
+          led.style.backgroundColor = status.color;
+          text.textContent = status.text;
+        }
+
+        updateStatus('serverStatus', 'server', 'serverText');
+        updateStatus('botStatus', 'bot', 'botText');
+        updateStatus('appStatus', 'app', 'appText');
       } catch (err) {
-        document.querySelectorAll('.status').forEach(el => el.textContent = '❌ Errore nel caricamento');
+        document.querySelectorAll('.led').forEach(el => el.style.backgroundColor = 'red');
+        document.querySelectorAll('.status-led span:last-child').forEach(el => el.textContent = 'Errore nel caricamento');
       }
     }
     loadStatus();
