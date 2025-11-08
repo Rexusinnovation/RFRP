@@ -269,13 +269,15 @@ footer {
 /* 🔥 Aggiunta per rendere i box orizzontali */
 .status-container.row {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-items: stretch;
+  align-items: flex-start;
   gap: 30px;
   flex-wrap: wrap;
+  width: 100%;
 }
 
-.status-box {
+.status-container.row .status-box {
   flex: 1 1 250px;
   max-width: 300px;
   text-align: center;
@@ -284,4 +286,16 @@ footer {
   padding: 25px;
   box-shadow: 0 0 15px #00ff88;
   background: rgba(0, 0, 0, 0.6);
+}
+
+/* 📱 Responsività: su schermi piccoli torna in verticale */
+@media (max-width: 768px) {
+  .status-container.row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .status-container.row .status-box {
+    max-width: 80%;
+  }
 }
