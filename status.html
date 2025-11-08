@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stato dei Servizi - RFRP IT®</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Aggiornamento per garantire layout orizzontale centrato */
+    .status-container.row {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .status-box {
+      flex: 1 1 250px;
+      max-width: 300px;
+      text-align: center;
+      border: 2px solid #00ff88;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 0 15px #00ff88;
+      background: rgba(0, 0, 0, 0.6);
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -65,18 +86,15 @@
   <script>
     async function aggiornaStato() {
       try {
-        const response = await fetch('status.json?_=' + new Date().getTime()); // forza aggiornamento
+        const response = await fetch('status.json?_=' + new Date().getTime());
         const data = await response.json();
 
-        // Stato Server
         document.getElementById('serverText').textContent = data.server;
         aggiornaLed('serverStatus', data.server);
 
-        // Stato Bot
         document.getElementById('botText').textContent = data.bot;
         aggiornaLed('botStatus', data.bot);
 
-        // Stato App
         document.getElementById('appText').textContent = data.app;
         aggiornaLed('appStatus', data.app);
       } catch (error) {
@@ -105,7 +123,6 @@
       }
     }
 
-    // Aggiorna ogni 5 secondi per riflettere eventuali modifiche
     aggiornaStato();
     setInterval(aggiornaStato, 5000);
   </script>
