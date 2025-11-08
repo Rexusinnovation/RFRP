@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RFRP IT® - Stato Server</title>
+  <title>Stato dei Servizi - RFRP IT®</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,21 +16,21 @@
           <div class="subtitle">Roleplay Server • FiveM</div>
         </div>
       </div>
-
       <nav class="main-nav">
         <a href="index.html">Home</a>
         <a href="status.html" class="active">Stato Server</a>
         <a href="staff.html">Area Staff</a>
       </nav>
-
-      <a class="buy-btn" href="https://rfrp-originals.tebex.io/" target="_blank">Compra</a>
+      <a href="#" class="buy-btn">Compra</a>
     </div>
-    <div class="neon-line"></div>
   </header>
 
-  <main class="status-main">
+  <div class="neon-line"></div>
+
+  <main>
     <h1 class="center-title">Stato dei Servizi</h1>
 
+    <!-- Aggiunto 'row' per allineare i box orizzontalmente -->
     <div class="status-container row">
       <div class="status-box">
         <h2>Server di Gioco</h2>
@@ -59,45 +59,55 @@
   </main>
 
   <footer>
-    <p style="text-align:center">© 2025 RFRP IT® - Tutti i diritti riservati</p>
+    © 2025 RFRP IT® - Tutti i diritti riservati
   </footer>
 
   <script>
-    async function loadStatus() {
+    async function aggiornaStato() {
       try {
-        // aggiunto timestamp per evitare cache di GitHub Pages
-        const res = await fetch('status.json?cacheBust=' + new Date().getTime());
-        if (!res.ok) throw new Error('File status.json non trovato');
+        const response = await fetch('status.json?_=' + new Date().getTime()); // forza aggiornamento
+        const data = await response.json();
 
-        const data = await res.json();
+        // Stato Server
+        document.getElementById('serverText').textContent = data.server;
+        aggiornaLed('serverStatus', data.server);
 
-        const statuses = {
-          Online: { text: 'Online', color: 'green' },
-          Offline: { text: 'Offline', color: 'red' },
-          Manutenzione: { text: 'In manutenzione', color: 'yellow' },
-          Aperte: { text: 'Aperte', color: 'green' },
-          Chiuse: { text: 'Chiuse', color: 'red' }
-        };
+        // Stato Bot
+        document.getElementById('botText').textContent = data.bot;
+        aggiornaLed('botStatus', data.bot);
 
-        function updateStatus(id, key, textId) {
-          const status = statuses[data[key]] || { text: data[key], color: 'gray' };
-          const led = document.getElementById(id);
-          const text = document.getElementById(textId);
-          led.style.backgroundColor = status.color;
-          text.textContent = status.text;
-        }
-
-        updateStatus('serverStatus', 'server', 'serverText');
-        updateStatus('botStatus', 'bot', 'botText');
-        updateStatus('appStatus', 'app', 'appText');
-      } catch (err) {
-        document.querySelectorAll('.led').forEach(el => el.style.backgroundColor = 'red');
-        document.querySelectorAll('.status-led span:last-child').forEach(el => el.textContent = 'Errore nel caricamento');
-        console.error(err);
+        // Stato App
+        document.getElementById('appText').textContent = data.app;
+        aggiornaLed('appStatus', data.app);
+      } catch (error) {
+        console.error("Errore nel caricamento dello stato:", error);
       }
     }
 
-    loadStatus();
+    function aggiornaLed(id, stato) {
+      const led = document.getElementById(id);
+      led.style.boxShadow = "";
+      switch (stato.toLowerCase()) {
+        case 'online':
+        case 'aperte':
+          led.style.backgroundColor = '#00ff80';
+          led.style.boxShadow = '0 0 10px #00ff80';
+          break;
+        case 'offline':
+        case 'chiuse':
+          led.style.backgroundColor = '#ff0033';
+          led.style.boxShadow = '0 0 10px #ff0033';
+          break;
+        default:
+          led.style.backgroundColor = '#ffaa00';
+          led.style.boxShadow = '0 0 10px #ffaa00';
+          break;
+      }
+    }
+
+    // Aggiorna ogni 5 secondi per riflettere eventuali modifiche
+    aggiornaStato();
+    setInterval(aggiornaStato, 5000);
   </script>
 </body>
 </html>
