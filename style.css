@@ -266,12 +266,12 @@ footer {
   box-shadow: 0 0 10px #00ff80;
 }
 
-/* 🔥 Aggiunta per rendere i box orizzontali */
+/* 🔥 Aggiornamento definitivo per rendere i box orizzontali e centrati */
 .status-container.row {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 30px;
   flex-wrap: wrap;
   width: 100%;
