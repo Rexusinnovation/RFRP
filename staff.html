@@ -85,18 +85,23 @@
   </footer>
 
   <script>
+    // --- Credenziali demo ---
     const USERS = [{ username: 'admin', password: '1234' }];
 
+    // --- Elementi principali ---
     const loginArea = document.getElementById('login-area');
     const panelArea = document.getElementById('panel-area');
     const loginForm = document.getElementById('loginForm');
     const loginError = document.getElementById('login-error');
     const loggedUserEl = document.getElementById('logged-user');
     const panelMsg = document.getElementById('panel-msg');
+    const logoutBtn = document.getElementById('logoutBtn');
 
+    // --- Gestione stato login ---
     function isLogged() {
       return !!localStorage.getItem('rfrp_logged_user');
     }
+
     function getLoggedUser() {
       return localStorage.getItem('rfrp_logged_user') || '';
     }
@@ -111,8 +116,10 @@
         panelArea.classList.add('hidden');
       }
     }
+
     refreshUI();
 
+    // --- LOGIN ---
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
       loginError.textContent = '';
@@ -127,11 +134,16 @@
       refreshUI();
     });
 
-    document.getElementById('logoutBtn').addEventListener('click', () => {
+    // --- LOGOUT funzionante ---
+    logoutBtn.addEventListener('click', () => {
       localStorage.removeItem('rfrp_logged_user');
-      refreshUI();
+      panelMsg.textContent = '';
+      setTimeout(() => {
+        refreshUI();
+      }, 200);
     });
 
+    // --- AGGIORNA STATO ---
     document.getElementById('saveBtn').addEventListener('click', async () => {
       const status = {
         server: document.getElementById('serverSelect').value,
@@ -140,14 +152,11 @@
       };
 
       try {
-        await fetch('status.json', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(status)
-        });
-        panelMsg.textContent = '✅ Stato aggiornato correttamente!';
+        // GitHub Pages non supporta scrittura diretta, simuliamo il salvataggio
+        console.log("Aggiornamento simulato:", status);
+        panelMsg.textContent = '✅ Stato aggiornato correttamente! (demo GitHub)';
       } catch (e) {
-        panelMsg.textContent = '⚠️ Non posso scrivere su GitHub Pages (demo locale).';
+        panelMsg.textContent = '⚠️ Non posso scrivere su GitHub Pages.';
       }
     });
   </script>
