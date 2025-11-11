@@ -35,7 +35,7 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-      padding-top: 120px; /* per non coprire l’header */
+      padding-top: 120px;
     }
 
     .panel {
@@ -79,7 +79,6 @@
   </header>
 
   <main>
-    <!-- AREA LOGIN -->
     <section class="staff-login" id="login-area">
       <h1>Accesso Area Staff</h1>
       <form id="loginForm" class="login-form" autocomplete="off">
@@ -91,7 +90,6 @@
       <p class="note">Accesso riservato ai membri dello staff RFRP IT®</p>
     </section>
 
-    <!-- PANNELLO -->
     <section id="panel-area" class="panel hidden">
       <h2>Pannello di Controllo</h2>
       <p class="small">Sei loggato come <strong id="logged-user"></strong></p>
@@ -134,9 +132,27 @@
     <p>© 2025 RFRP IT® - Tutti i diritti riservati</p>
   </footer>
 
-  <script>
-    const USERS = [{ username: 'admin', password: '1234' }];
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
+    // 🔥 Configurazione Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDMLYtUSS-2XYoKIRzvS39ls4ln4c56oY4",
+      authDomain: "aggiorna-pagina-stato-server.firebaseapp.com",
+      projectId: "aggiorna-pagina-stato-server",
+      storageBucket: "aggiorna-pagina-stato-server.firebasestorage.app",
+      messagingSenderId: "138766621965",
+      appId: "1:138766621965:web:fc2631db734d7853696444",
+      measurementId: "G-57HLJGTRJL"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // --- LOGIN ---
+    const USERS = [{ username: 'admin', password: '1234' }];
     const loginArea = document.getElementById('login-area');
     const panelArea = document.getElementById('panel-area');
     const loginForm = document.getElementById('loginForm');
@@ -145,12 +161,9 @@
     const panelMsg = document.getElementById('panel-msg');
     const logoutBtn = document.getElementById('logoutBtn');
 
-    function isLogged() {
-      return !!localStorage.getItem('rfrp_logged_user');
-    }
-    function getLoggedUser() {
-      return localStorage.getItem('rfrp_logged_user') || '';
-    }
+    function isLogged() { return !!localStorage.getItem('rfrp_logged_user'); }
+    function getLoggedUser() { return localStorage.getItem('rfrp_logged_user') || ''; }
+
     function refreshUI() {
       if (isLogged()) {
         loginArea.classList.add('hidden');
@@ -183,45 +196,19 @@
       setTimeout(refreshUI, 200);
     });
 
-    // AGGIORNA STATO - con GitHub API
+    // --- AGGIORNA STATO con Firebase ---
     document.getElementById('saveBtn').addEventListener('click', async () => {
       const status = {
         server: document.getElementById('serverSelect').value,
         bot: document.getElementById('botSelect').value,
-        app: document.getElementById('appSelect').value
+        app: document.getElementById('appSelect').value,
+        updatedAt: new Date().toISOString()
       };
 
       try {
-        const token = "Il tuo token github";
-        const repoOwner = "rexusinnovation";
-        const repoName = "RFRP";
-        const filePath = "status.json";
-        const branch = "main";
-
-        const getResp = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}?ref=${branch}`, {
-          headers: { Authorization: `token ${token}` }
-        });
-        const fileData = await getResp.json();
-
-        const newContent = btoa(JSON.stringify(status, null, 2));
-
-        await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
-          method: "PUT",
-          headers: {
-            Authorization: `token ${token}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            message: "Aggiornamento stato server da Area Staff",
-            content: newContent,
-            sha: fileData.sha,
-            branch
-          })
-        });
-
-        panelMsg.textContent = "✅ Stato aggiornato correttamente su GitHub!";
+        await setDoc(doc(db, "status", "rfrp"), status);
+        panelMsg.textContent = "✅ Stato aggiornato correttamente!";
       } catch (e) {
-        console.error(e);
         panelMsg.textContent = "⚠️ Errore durante l’aggiornamento: " + e.message;
       }
     });
